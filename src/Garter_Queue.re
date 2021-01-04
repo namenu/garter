@@ -22,3 +22,11 @@ let tail =
   fun
   | ([], _) => raise(Not_found)
   | ([_, ...f], r) => checkf((f, r));
+
+let toList = q => {
+  let rec f = q =>
+    try([head(q), ...tail(q)->f]) {
+    | Not_found => []
+    };
+  f(q);
+};

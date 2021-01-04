@@ -8,7 +8,4 @@ let charCode = s => {
 
 [@bs.val] external parseInt: (t, ~radix: int=?) => int = "parseInt";
 
-/**
- * str, targetLength, padString => paddedString
- */
 [@bs.send] external padStart: (t, int, t) => t = "padStart";
