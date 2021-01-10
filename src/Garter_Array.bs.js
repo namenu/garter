@@ -8,6 +8,7 @@ var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Belt_MapInt = require("bs-platform/lib/js/belt_MapInt.js");
 var Caml_option = require("bs-platform/lib/js/caml_option.js");
+var Garter_Vector = require("@namenu/garter-vector/src/Garter_Vector.bs.js");
 
 function isEmpty(xs) {
   return xs.length === 0;
@@ -280,6 +281,8 @@ var eqU = Belt_Array.eqU;
 
 var eq = Belt_Array.eq;
 
+var toVector = Garter_Vector.fromArray;
+
 exports.get = get;
 exports.getExn = getExn;
 exports.set = set;
@@ -360,4 +363,5 @@ exports.max = max;
 exports.maxIndex = maxIndex;
 exports.reduce1 = reduce1;
 exports.windows = windows;
+exports.toVector = toVector;
 /* No side effect */

@@ -472,6 +472,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@namenu/garter-vector@git+ssh://git@github.com/namenu/garter-vector":
+  version "0.1.0"
+  resolved "git+ssh://git@github.com/namenu/garter-vector#ac231bd64276171881f720ce4a79941b090f7d29"
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.1.tgz#e7df00f98a203324f6dc7cc606cad9d4a8ab2217"

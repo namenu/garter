@@ -11,6 +11,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@namenu/garter-vector": "git+ssh://git@github.com/namenu/garter-vector"
+  },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.6.0",
     "bs-platform": "^8.3.1",

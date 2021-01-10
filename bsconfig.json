@@ -1,22 +1,18 @@
 {
   "name": "@namenu/garter",
   "version": "0.1.0",
-  "sources": [
-    {
-      "dir": "src",
-      "subdirs": true
-    },
-    {
-      "dir": "__tests__",
-      "type": "dev"
-    }
-  ],
+  "sources": {
+    "dir": "src",
+    "subdirs": true
+  },
   "package-specs": {
     "module": "commonjs",
     "in-source": true
   },
   "suffix": ".bs.js",
-  "bs-dependencies": [],
+  "bs-dependencies": [
+    "@namenu/garter-vector"
+  ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest"
   ],

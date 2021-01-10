@@ -50,3 +50,8 @@ let partitionBy = (xs: list('a), f: 'a => 'b): list(list('a)) => {
   | [x, ...xs] => iter(xs, f(x), [x], [])
   };
 };
+
+module V = Garter_Vector;
+
+let fromVector = v => v->V.toArray->fromArray;
+let toVector = xs => xs->toArray->V.fromArray;

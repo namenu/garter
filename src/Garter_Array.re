@@ -112,3 +112,5 @@ let windows = (xs, ~n: int, ~step=n, ()) => {
     };
   iter(0)->Belt.List.toArray;
 };
+
+let toVector = Garter_Vector.fromArray;

@@ -5,6 +5,7 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Belt_List = require("bs-platform/lib/js/belt_List.js");
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
+var Garter_Vector = require("@namenu/garter-vector/src/Garter_Vector.bs.js");
 
 function isEmpty(xs) {
   return Belt_List.length(xs) === 0;
@@ -91,6 +92,14 @@ function partitionBy(xs, f) {
     _ys = ys$1;
     continue ;
   };
+}
+
+function fromVector(v) {
+  return Belt_List.fromArray(Garter_Vector.toArray(v));
+}
+
+function toVector(xs) {
+  return Garter_Vector.fromArray(Belt_List.toArray(xs));
 }
 
 var length = Belt_List.length;
@@ -267,6 +276,8 @@ var sortU = Belt_List.sortU;
 
 var sort = Belt_List.sort;
 
+var V;
+
 exports.length = length;
 exports.size = size;
 exports.head = head;
@@ -360,4 +371,7 @@ exports.dropExn = dropExn;
 exports.splitAt = splitAt;
 exports.orderedPairs = orderedPairs;
 exports.partitionBy = partitionBy;
+exports.V = V;
+exports.fromVector = fromVector;
+exports.toVector = toVector;
 /* No side effect */
