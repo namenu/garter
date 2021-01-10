@@ -75,10 +75,15 @@ let scan = (xs, init, f) => {
   state;
 };
 
-let max = xs => {
-  let res = getUnsafe(xs, 0);
-  reduce(xs, res, (x, res) => max(x, res));
+let reduce1 = (xs, f) => {
+  let r = ref(xs->Belt.Array.getUnsafe(0));
+  for (i in 1 to length(xs) - 1) {
+    r := f(r^, xs->Belt.Array.getUnsafe(i));
+  };
+  r^;
 };
+
+let max = xs => reduce1(xs, max);
 
 /** Returns (max_value, index). Array may not be empty. */
 let maxIndex = xs => {
@@ -94,13 +99,7 @@ let maxIndex = xs => {
   ->snd;
 };
 
-let reduce1 = (xs, f) => {
-  let r = ref(xs->Belt.Array.getUnsafe(0));
-  for (i in 1 to length(xs) - 1) {
-    r := f(r^, xs->Belt.Array.getUnsafe(i));
-  };
-  r^;
-};
+let min = xs => reduce1(xs, min);
 
 let windows = (xs, ~n: int, ~step=n, ()) => {
   let len = size(xs);

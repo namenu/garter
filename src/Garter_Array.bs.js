@@ -94,9 +94,16 @@ function scan(xs, init, f) {
   return state;
 }
 
+function reduce1(xs, f) {
+  var r = xs[0];
+  for(var i = 1 ,i_finish = xs.length; i < i_finish; ++i){
+    r = Curry._2(f, r, xs[i]);
+  }
+  return r;
+}
+
 function max(xs) {
-  var res = xs[0];
-  return Belt_Array.reduce(xs, res, Caml_obj.caml_max);
+  return reduce1(xs, Caml_obj.caml_max);
 }
 
 function maxIndex(xs) {
@@ -121,12 +128,8 @@ function maxIndex(xs) {
                 }))[1];
 }
 
-function reduce1(xs, f) {
-  var r = xs[0];
-  for(var i = 1 ,i_finish = xs.length; i < i_finish; ++i){
-    r = Curry._2(f, r, xs[i]);
-  }
-  return r;
+function min(xs) {
+  return reduce1(xs, Caml_obj.caml_min);
 }
 
 function windows(xs, n, stepOpt, param) {
@@ -359,9 +362,10 @@ exports.groupBy = groupBy;
 exports.Int = Int;
 exports.frequencies = frequencies;
 exports.scan = scan;
+exports.reduce1 = reduce1;
 exports.max = max;
 exports.maxIndex = maxIndex;
-exports.reduce1 = reduce1;
+exports.min = min;
 exports.windows = windows;
 exports.toVector = toVector;
 /* No side effect */

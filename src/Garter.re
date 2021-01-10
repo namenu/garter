@@ -14,12 +14,11 @@ module Set = Garter_Set;
 
 module String = Garter_String;
 
+type vec('a) = Garter_Vector.t('a);
+
 module Vector = {
   include Garter_Vector;
 
-  let doWithArray = (vec, f) => vec->toArray->f->fromArray;
-
-  let max = v => doWithArray(v, Array.max);
+  // stratify applications here 
+  let max: vec('a) => 'a = v => v->toArray->Array.max;
 };
-
-type vec('a) = Vector.t('a);
