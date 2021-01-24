@@ -472,10 +472,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@namenu/garter-vector@git+ssh://git@github.com/namenu/garter-vector":
-  version "0.1.0"
-  resolved "git+ssh://git@github.com/namenu/garter-vector#ac231bd64276171881f720ce4a79941b090f7d29"
-
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.1.tgz#e7df00f98a203324f6dc7cc606cad9d4a8ab2217"
@@ -2775,6 +2771,10 @@ qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+
+"re-vector@git+ssh://git@github.com/reason-seoul/re-vector":
+  version "0.1.0"
+  resolved "git+ssh://git@github.com/reason-seoul/re-vector#5694275688ffbb59a3d5717b6a1ad6cc927facee"
 
 react-is@^17.0.1:
   version "17.0.1"

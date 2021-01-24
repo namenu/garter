@@ -12,7 +12,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@namenu/garter-vector": "git+ssh://git@github.com/namenu/garter-vector"
+    "re-vector": "git+ssh://git@github.com/reason-seoul/re-vector"
   },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.6.0",
