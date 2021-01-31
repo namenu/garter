@@ -12,53 +12,58 @@ let updateUnsafe = (ar, i, f) => {
 };
 
 /**
-    {|
-      module IntCmp =
-        Belt.Id.MakeComparable({
-          type t = int;
-          let cmp = (a, b) => Pervasives.compare(a, b);
-        });
-
-      groupBy(
-        [|1, 2, 3, 4, 5, 6, 7, 8, 9, 10|],
-        ~keyFn=x => x mod 3,
-        ~id=(module IntCmp),
-      )
-    |}
+ * ~keyFn으로 그루핑된 Belt.Map을 반환합니다.
+ * ~id에는 Belt.Id.Comparable 모듈이 전달되어야 합니다.
+ * 일반적인 타입에 대한 Comparable 모듈은 Garter.Id를 참고하세요.
+ *
+ * 예)
+ * ```
+ * groupBy(
+ *   [|1, 2, 3, 4, 5, 6, 7, 8, 9, 10|],
+ *   ~keyFn=x => x mod 3,
+ *   ~id=Garter.Id.IntComparable,
+ * )
+ * ```
  */
-
 let groupBy = (xs, ~keyFn, ~id) => {
+  Js.log(keyFn);
   let empty = Belt.Map.make(~id);
 
   reduceU(xs, empty, (. res, x) => {
     Belt.Map.updateU(res, keyFn(x), (. v) =>
       switch (v) {
-      | Some(l) => Some([x, ...l])
-      | None => Some([x])
+      | Some(l) => Some(l->concat([|x|]))
+      | None => Some([|x|])
       }
     )
-  })
-  ->Belt.Map.map(Belt.List.toArray);
+  });
 };
 
-module Int = {
-  let groupBy = (xs, ~keyFn) => {
-    let empty = Belt.Map.Int.empty;
+[|1, 2, 3, 1, 2, 3|]
+->groupBy(~keyFn=x => x mod 3, ~id=(module Garter_Id.IntComparable))
+->Belt.Map.toArray
+->Js.log;
 
-    reduceU(xs, empty, (. res, x) => {
-      Belt.Map.Int.updateU(res, keyFn(x), (. v) =>
-        switch (v) {
-        | Some(l) => Some([x, ...l])
-        | None => Some([x])
-        }
-      )
-    })
-    ->Belt.Map.Int.map(Belt.List.toArray);
-  };
-};
-
+/**
+ * 배열에 들어있는 값들의 빈도를 구하여 Map으로 반환합니다.
+ */
 let frequencies = (ar, ~id) => {
-  groupBy(ar, ~keyFn=x => x, ~id)->Belt.Map.map(Belt.Array.length);
+  groupBy(ar, ~keyFn=Garter_Fn.identity, ~id)->Belt.Map.map(length);
+};
+
+/** 먼저 등장하는 순서를 유지하면서 중복 원소를 제거합니다. */
+let distinct = (ar, ~id) => {
+  ar
+  ->reduce((Belt.Set.make(~id), []), ((seen, res), v) =>
+      if (seen->Belt.Set.has(v)) {
+        (seen, res);
+      } else {
+        (seen->Belt.Set.add(v), res->Belt.List.add(v));
+      }
+    )
+  ->snd
+  ->Belt.List.reverse
+  ->Belt.List.toArray;
 };
 
 /** reduce와 비슷하나 중간 결과를 모두 포함한 array를 반환해줌 */
@@ -112,4 +117,4 @@ let windows = (xs, ~n: int, ~step=n, ()) => {
   iter(0)->Belt.List.toArray;
 };
 
-let toVector = Garter_Vector.fromArray;
+let toVector = Re_Vector.fromArray;

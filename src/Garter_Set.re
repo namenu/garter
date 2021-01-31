@@ -1,6 +1,6 @@
 include Belt.Set;
 
-module V = Garter_Vector;
+module V = Re_Vector;
 
 let fromVector: (V.t('a), ~id: Belt.Set.id('a, 'b)) => Belt.Set.t('a, 'b) =
   (v, ~id) => v->V.toArray->Belt.Set.fromArray(~id);
